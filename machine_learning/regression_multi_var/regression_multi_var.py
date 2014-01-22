@@ -136,14 +136,27 @@ def normal_eq(X,Y):
 
     Returns
     -------
-    th:         n x 1 matrix, solution to  th = (X.T X).inv X.T Y
+    th:         n x 1 matrix, solution to  (X.T X) th =  X.T Y
     .T is the transpose
     .inv is the inverse
     '''
+
     assert len(X) == len(Y)
-    inverse = np.linalg.inv
     dot = np.dot
-    return dot( inverse( dot( X.transpose(), X ) ), dot(X.transpose(),Y) )
+    solve = np.linalg.solve
+
+    #X[0] = X[-1]
+    #test = dot(X.T, X)
+    #print test
+
+    #print np.linalg.matrix_rank(test)
+
+    #solve( test, dot(X.T,Y) )    
+
+    return solve( dot(X.transpose(),X), dot(X.transpose(),Y) )
+
+def predict(x,th):
+    pass
 
 if __name__ == "__main__":
     if len(sys.argv) > 2:
